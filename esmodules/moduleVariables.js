@@ -6,7 +6,7 @@ export let socket;
 Hooks.once("socketlib.ready", () => {
   socket = socketlib.registerModule(NAME);
   socket.register("sendScreenshotToDiscord", screenshot.sendToDiscord);
-  socket.register("zoomToFitTokens", zoom.fitTokens);
+  socket.register("zoomToFitTokensByCamera", zoom.fitTokensByCamera);
 });
 
 export class Settings {
