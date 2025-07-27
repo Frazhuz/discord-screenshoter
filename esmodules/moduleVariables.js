@@ -1,10 +1,12 @@
 export const NAME = "discord-screenshoter";
 
 import * as screenshot from "./screenshot.js"
+import * as zoom from "./zoom.js"
 export let socket;
 Hooks.once("socketlib.ready", () => {
   socket = socketlib.registerModule(NAME);
   socket.register("sendScreenshotToDiscord", screenshot.sendToDiscord);
+  socket.register("zoomToFitTokensByCamera", zoom.fitTokensByCamera);
 });
 
 export class Settings {
@@ -12,7 +14,7 @@ export class Settings {
 
     game.settings.register(NAME, "webhookUrl", {
       name: "Discord Webhook URL",
-      hint: "Paste the Discord webhook URL to send screenshots.",
+      hint: "Вставьте URL вебхука Discord для отправки скриншотов",
       scope: "world",
       config: true,
       type: new foundry.data.fields.StringField(),
@@ -20,7 +22,7 @@ export class Settings {
 
     game.settings.register(NAME, "cameraUser", {
       name: "Camera User",
-      hint: "Insert the user ID on whose behalf the screenshots will be taken (without the word User).",
+      hint: "Вставьте  id пользователя, от лица которого будут выполняться скриншоты (без слова User)",
       scope: "world",
       config: true,
       type: new foundry.data.fields.StringField()
@@ -28,7 +30,7 @@ export class Settings {
 
     game.settings.register(NAME, "quality", {
       name: "Quality",
-      hint: "Quality of sent screenshots.",
+      hint: "Качество отправляемых скриншотов.",
       scope: "world",
       config: true,
       type: Number,
@@ -42,7 +44,7 @@ export class Settings {
 
     game.settings.register(NAME, "padding", {
       name: "Padding",
-      hint: "Extra space left when scaling to accommodate all tokens.",
+      hint: "Дополнительное пространство, оставляемое при масштабировании для вмещения всех токенов.",
       scope: "world",
       config: true,
       type: Number,
@@ -56,7 +58,7 @@ export class Settings {
 
     game.settings.register(NAME, "trueInvisibiliy", {
       name: "True invisibiliy",
-      hint: "Temporarily make hidden tokens invisible even to the GM if the screenshot is taken from his perspective.",
+      hint: "Временно делать невидимые токены невидимыми даже для ГМа, если скриншот делается от его лица.",
       scope: "world",
       config: true,
       type: Boolean,
@@ -65,7 +67,7 @@ export class Settings {
 
     game.settings.register(NAME, "delay", {
       name: "Delay",
-      hint: "Delay between invisible tokens disappearing and screenshot (ms). If hidden tokens are still visible in screenshots, increase the delay.",
+      hint: "Задержка между исчезновением невидимых токенов и скриншотом (мс).",
       scope: "world",
       config: true,
       type: new foundry.data.fields.NumberField(),
@@ -74,15 +76,15 @@ export class Settings {
 
     game.settings.register(NAME, "autoScreenshot", {
       name: 'Auto screenshot',
-      hint: "Automatically take and send a screenshot when changing turns in an encounter.",
+      hint: "Автоматически делать и отправлять скриншот при смене хода в энкаунтере.",
       scope: "world",
       config: true,
       type: new foundry.data.fields.StringField({
         choices: {
-          "a": "No.",
-          "b": "When a token that has a player as its owner turns.",
-          "c": "At the start of the encounter and when that has a player as its owner turns.",
-          "d": "Always."
+          "a": "Нет",
+          "b": "При ходе токена, имеющего игрока в качестве владельца",
+          "c": "В начале боя и при ходе токена, имеющего игрока в качестве владельца",
+          "d": "Всегда"
         },
       }),
       default: "b"
@@ -90,7 +92,7 @@ export class Settings {
 
     game.settings.register(NAME, "autoChoose", {
       name: "Auto choose",
-      hint: "When taking automatic screenshots, automatically select the appropriate token.",
+      hint: "При автоматических скриншотах автоматически выбирать соответствующий токен.",
       scope: "world",
       config: true,
       type: Boolean,
