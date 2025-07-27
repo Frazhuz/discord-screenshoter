@@ -12,7 +12,7 @@ export class Settings {
 
     game.settings.register(NAME, "webhookUrl", {
       name: "Discord Webhook URL",
-      hint: "Вставьте URL вебхука Discord для отправки скриншотов",
+      hint: "Paste the Discord webhook URL to send screenshots.",
       scope: "world",
       config: true,
       type: new foundry.data.fields.StringField(),
@@ -20,7 +20,7 @@ export class Settings {
 
     game.settings.register(NAME, "cameraUser", {
       name: "Camera User",
-      hint: "Вставьте  id пользователя, от лица которого будут выполняться скриншоты (без слова User)",
+      hint: "Insert the user ID on whose behalf the screenshots will be taken (without the word User).",
       scope: "world",
       config: true,
       type: new foundry.data.fields.StringField()
@@ -28,7 +28,7 @@ export class Settings {
 
     game.settings.register(NAME, "quality", {
       name: "Quality",
-      hint: "Качество отправляемых скриншотов.",
+      hint: "Quality of sent screenshots.",
       scope: "world",
       config: true,
       type: Number,
@@ -42,7 +42,7 @@ export class Settings {
 
     game.settings.register(NAME, "padding", {
       name: "Padding",
-      hint: "Дополнительное пространство, оставляемое при масштабировании для вмещения всех токенов.",
+      hint: "Extra space left when scaling to accommodate all tokens.",
       scope: "world",
       config: true,
       type: Number,
@@ -56,7 +56,7 @@ export class Settings {
 
     game.settings.register(NAME, "trueInvisibiliy", {
       name: "True invisibiliy",
-      hint: "Временно делать невидимые токены невидимыми даже для ГМа, если скриншот делается от его лица.",
+      hint: "Temporarily make hidden tokens invisible even to the GM if the screenshot is taken from his perspective.",
       scope: "world",
       config: true,
       type: Boolean,
@@ -65,7 +65,7 @@ export class Settings {
 
     game.settings.register(NAME, "delay", {
       name: "Delay",
-      hint: "Задержка между исчезновением невидимых токенов и скриншотом (мс).",
+      hint: "Delay between invisible tokens disappearing and screenshot (ms). If hidden tokens are still visible in screenshots, increase the delay.",
       scope: "world",
       config: true,
       type: new foundry.data.fields.NumberField(),
@@ -74,15 +74,15 @@ export class Settings {
 
     game.settings.register(NAME, "autoScreenshot", {
       name: 'Auto screenshot',
-      hint: "Автоматически делать и отправлять скриншот при смене хода в энкаунтере.",
+      hint: "Automatically take and send a screenshot when changing turns in an encounter.",
       scope: "world",
       config: true,
       type: new foundry.data.fields.StringField({
         choices: {
-          "a": "Нет",
-          "b": "При ходе токена, имеющего игрока в качестве владельца",
-          "c": "В начале боя и при ходе токена, имеющего игрока в качестве владельца",
-          "d": "Всегда"
+          "a": "No.",
+          "b": "When a token that has a player as its owner turns.",
+          "c": "At the start of the encounter and when that has a player as its owner turns.",
+          "d": "Always."
         },
       }),
       default: "b"
@@ -90,7 +90,7 @@ export class Settings {
 
     game.settings.register(NAME, "autoChoose", {
       name: "Auto choose",
-      hint: "При автоматических скриншотах автоматически выбирать соответствующий токен.",
+      hint: "When taking automatic screenshots, automatically select the appropriate token.",
       scope: "world",
       config: true,
       type: Boolean,
